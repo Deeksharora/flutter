@@ -13,7 +13,7 @@ class SettingScreen extends StatefulWidget {
 }
 enum Choice { yes, no }
 class _SettingScreenState extends State<SettingScreen> {
-  Choice? _character;
+  Choice? _character=Choice.yes;
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -25,7 +25,7 @@ class _SettingScreenState extends State<SettingScreen> {
       body: SafeArea(
         child: Consumer<Marks>(
           builder: (context,marks,child){
-
+          Choice? _character=marks.character;
           return Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,7 +57,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       int nameid= 1;
                                       marks.nameorid(nameid);
                                       setState(() {
-                                        _character = value;
+                                        _character = marks.character;
                                       });
                                     },
                                   ),
@@ -73,7 +73,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       marks.nameorid(nameid);
                                       setState(
                                         () {
-                                          _character = value;
+                                          _character = marks.character;
                                         },
                                       );
                                     },

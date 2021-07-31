@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'settingScreen.dart';
+
 class Marks extends ChangeNotifier{
   int name=1;
 double _marks =0;
@@ -17,6 +19,7 @@ double _marks =0;
 List <String> number = ['1','2','3','4','5','6'];
 int count =0;int prevcount =0;
 int listnumber=6;
+Choice character= Choice.yes;
 
   void assign([String? newValue]){
     number.remove(newValue);
@@ -28,5 +31,11 @@ int listnumber=6;
  void nameorid(int value)
  {
    name=value;
+   if(value==1)
+   character=Choice.yes;
+   else
+   character=Choice.no;
  }
+
+
 }
