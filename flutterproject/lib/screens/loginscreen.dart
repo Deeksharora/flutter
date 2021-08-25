@@ -64,7 +64,7 @@ login() async {
         final UserCredential user =
             await _auth.signInWithCredential(credential);
           User? _user = user.user;
-            await Database(uid: _user!.uid).updateuserdata(_user.displayName.toString(), _user.email.toString(), true , [0, 0, 0, 0, 0]);
+            await Database(uid: _user!.uid).updateuserdata(_user.displayName.toString(), _user.email.toString(), true ,0,-1,-1,-1,-1,-1);
 
          Navigator.push(context, MaterialPageRoute(
         builder: (context) => NavigationScreen()));
@@ -200,11 +200,7 @@ login() async {
                     child: Card(
                       color: Color(0xff2FC4B2),
                       child: TextButton(
-                        onPressed: () {
-                          
-            
-            
-                          },
+                        onPressed: login,
                         child: Text(
                           'LOG IN',
                           style: TextStyle(color: Colors.white, fontSize: 20),

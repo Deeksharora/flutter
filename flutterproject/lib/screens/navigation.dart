@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'loginscreen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'homescreen.dart';
+import 'home.dart';
 import 'coursemodule.dart';
-import 'settingsscreen.dart';
+import 'settings.dart';
 
 class NavigationScreen extends StatefulWidget {
   const NavigationScreen({ Key? key }) : super(key: key);

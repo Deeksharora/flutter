@@ -13,6 +13,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   FirebaseAuth _auth = FirebaseAuth.instance;
+  
 
 String? id='';
   final _formKey = GlobalKey<FormState>();
@@ -49,7 +50,7 @@ String? id='';
             User? _user = result.user;
             
         await _auth.currentUser!.updateDisplayName(_name);
-        await Database(uid: _user!.uid).updateuserdata(_name, _id, true ,[ 0, 0, 0, 0, 0]);
+        await Database(uid: _user!.uid).updateuserdata(_name, _id, true ,0,-1,-1,-1,-1,-1);
       } catch (e) {
         showError(e.toString());
         print(e);
@@ -77,6 +78,7 @@ String? id='';
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -89,192 +91,151 @@ String? id='';
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-              Center(
-                child: Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: 350,
-                    height: 60,
-                    color: Color(0xff2FC4B2),
-                    child: Text(
-                      'CRUX FLUTTER SUMMER GROUP',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
+                    SizedBox(height: 20,),
+              Container(
+                alignment: Alignment.center,
+                width: 350,
+                height: 60,
+                color: Color(0xff2FC4B2),
+                child: Text(
+                  'CRUX FLUTTER SUMMER GROUP',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
-              Column(
-                children: [
-                  //Padding(padding: EdgeInsets.all(25)),
-                  Column(
-                    children: [
-                      Padding(padding: EdgeInsets.all(12)),
-                      Container(
-                        width: 320,
-                        child: Text(
-                          'Name',
-                          style: TextStyle(color: Colors.black, fontSize: 15),
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                      Container(
-                        width: 320,
-                        height: 60,
-                        color: Colors.grey[300],
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Center(
-                            child: Expanded(
-                              child: TextFormField(
-                                 validator: (input)
-                              {
-                                if(input!.isEmpty)
-                                return 'Enter name';
-                              },
-                              onSaved: (input) => _name = input!,
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Please enter your Name'),
-                                     ),
-                            ),
+              Container(
+                width: screenSize.width * 0.85,
+                child: Column(
+                  children: [
+                    //Padding(padding: EdgeInsets.all(25)),
+                    Column(
+                      children: [
+                        Padding(padding: EdgeInsets.all(12)),
+                        Container(
+                          height: screenSize.height * 0.04,
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Name',
+                            
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Padding(padding: EdgeInsets.all(12)),
-                      Container(
-                        width: 320,
-                        child: Text(
-                          'ID Number',
-                          style: TextStyle(color: Colors.black, fontSize: 15),
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                      Container(
-                        width: 320,
-                        height: 60,
-                        color: Colors.grey[300],
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Center(
-                            child: Expanded(
-                              child: TextFormField(
-                                 validator: (input)
-                              {
-                                if(input!.isEmpty)
-                                return 'Enter valid ID Number';
-                              },
-                              onSaved: (input) => _id = input!,
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Please enter your BITS ID Number'),
-                                     ),
-                            ),
+                        TextFormField(
+                           validator: (input)
+                        {
+                          if(input!.isEmpty)
+                          return 'Enter name';
+                        },
+                        onSaved: (input) => _name = input!,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              fillColor: Colors.grey[300],
+                              filled: true,
+                              hintText: 'Please enter your Name'),
+                               ),
+                      ],
+                    ),
+                    
+                    Column(
+                      children: [
+                        Padding(padding: EdgeInsets.all(12)),
+                        Container(
+                         height: screenSize.height * 0.04,
+                         alignment: Alignment.centerLeft,
+                          child: Text(
+                            'ID Number',
+                            
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Padding(padding: EdgeInsets.all(12)),
-                      Container(
-                        width: 320,
-                        child: Text(
-                          'Email',
-                          style: TextStyle(color: Colors.black, fontSize: 15),
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                      Container(
-                        width: 320,
-                        height: 60,
-                        color: Colors.grey[300],
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Center(
-                            child: Expanded(
-                              child: TextFormField(
-                                 validator: (input)
-                              {
-                                if(input!.isEmpty)
-                                return 'Enter valid email';
-                              },
-                              onSaved: (input) => _email = input!,
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Please Enter your Email'),
-                                     ),
-                            ),
+                        TextFormField(
+                           validator: (input)
+                        {
+                          if(input!.isEmpty)
+                          return 'Enter valid ID Number';
+                        },
+                        onSaved: (input) => _id = input!,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              fillColor: Colors.grey[300],
+                            filled: true,
+                              hintText: 'Please enter your BITS ID Number'),
+                               ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Padding(padding: EdgeInsets.all(12)),
+                        Container(
+                           height: screenSize.height * 0.04,
+                           alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Email',
+                            
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Padding(padding: EdgeInsets.all(12)),
-                      Container(
-                        width: 320,
-                        child: Text(
-                          'Password',
-                          style: TextStyle(color: Colors.black, fontSize: 15),
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                      Container(
-                        width: 320,
-                        height: 60,
-                        color: Colors.grey[300],
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Center(
-                            child: Expanded(
-                              child: TextFormField(
-                                validator : (input)
-                              {
-                                if(input!.length<6)
-                                return 'password should be atleast 6 characters long';
-                              },
-                              onSaved: (input) => _password = input!,
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'Please enter your password',
-                                ),
-                              ),
-                            ),
+                        TextFormField(
+                           validator: (input)
+                        {
+                          if(input!.isEmpty)
+                          return 'Enter valid email';
+                        },
+                        onSaved: (input) => _email = input!,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              fillColor: Colors.grey[300],
+                            filled: true,
+                              hintText: 'Please Enter your Email'),
+                               ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Padding(padding: EdgeInsets.all(12)),
+                        Container(
+                          height: screenSize.height*0.04,
+                         alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Password',
+                            
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Padding(padding: EdgeInsets.all(12)),
-                      Container(
-                        width: 320,
-                        child: Text(
-                          'Batch',
-                          style: TextStyle(color: Colors.black, fontSize: 15),
-                          textAlign: TextAlign.start,
+                        TextFormField(
+                          validator : (input)
+                        {
+                          if(input!.length<6)
+                          return 'password should be atleast 6 characters long';
+                        },
+                        onSaved: (input) => _password = input!,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                             fillColor: Colors.grey[300],
+                            filled: true,
+                            hintText: 'Please enter your password',
+                          ),
                         ),
-                      ),
-                      Container(
-                        width: 320,
-                        height: 60,
-                        color: Colors.grey[300],
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Center(
-                            child: Expanded(
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Padding(padding: EdgeInsets.all(12)),
+                        Container(
+                          height: screenSize.height*0.04,
+                         alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Batch',
+                            
+                          ),
+                        ),
+                        Container(
+                          width: screenSize.width * 0.85,
+                          height: screenSize.height*0.06,
+                          color: Colors.grey[300],
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Center(
                               child: DropdownButton<String>(
                                 isExpanded: true,
                                 value: dropdownValue,
@@ -300,38 +261,42 @@ String? id='';
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
-                width: 300,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Receive Regular Updates',
-                        style: TextStyle(color: Colors.black, fontSize: 15),
-                        textAlign: TextAlign.start),
-                    Switch(
-                      value: _switch,
-                      onChanged: (value) {
-                        setState(() {
-                          _switch = value;
-                          print(_switch);
-                        });
-                      },
-                      activeTrackColor: Colors.grey,
-                      activeColor: Color(0xff2FC4B2),
-                    )
-                  ],
+                 width: screenSize.width * 0.80,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Receive Regular Updates',
+                          style: TextStyle(color: Colors.black, fontSize: 15),
+                          textAlign: TextAlign.start),
+                      Switch(
+                        value: _switch,
+                        onChanged: (value) {
+                          setState(() {
+                            _switch = value;
+                            print(_switch);
+                          });
+                        },
+                        activeTrackColor: Colors.grey,
+                        activeColor: Color(0xff2FC4B2),
+                      )
+                    ],
+                  ),
                 ),
               ),
               Column(
                 
                 children: [
+                  Padding(padding: EdgeInsets.all(12)),
                   SizedBox(
-                    width: 300,
+                     width: screenSize.width * 0.80,
                     child: Text('Are you excited for this !!',
                           style: TextStyle(color: Colors.black, fontSize: 15,),
                           textAlign: TextAlign.start,
@@ -378,29 +343,30 @@ String? id='';
                         
                 ],
               ),
+              SizedBox(height: screenSize.height*0.02,),
               Container(
-                width: 320,
-                height: 35,
+                 width: screenSize.width * 0.85,
+                 height: screenSize.height * 0.06,
+                
                 decoration: BoxDecoration(
                     color: Color(0xff2FC4B2),
                     borderRadius: BorderRadius.circular(10)),
-                child: Expanded(
-                  child: TextButton(
-                      style: TextButton.styleFrom(
-                          textStyle:
-                              TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                          primary: Colors.white,
-                          padding: EdgeInsets.symmetric()),
-                      onPressed: signUp,
-                      child: Text('REGISTER')),
-                ),
+                child: TextButton(
+                    style: TextButton.styleFrom(
+                        textStyle:
+                            TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                        primary: Colors.white,
+                        padding: EdgeInsets.symmetric()),
+                    onPressed: signUp,
+                    child: Text('REGISTER')),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Padding(padding: EdgeInsets.all(12)),
                   Text(
                     'Already have an account ',
-                    style: TextStyle(color: Colors.black, fontSize: 15),
+                    
                   ),
                   TextButton(
                       onPressed: () {
@@ -413,7 +379,7 @@ String? id='';
                         'Login',
                         style: TextStyle(
                           color: Color(0xff2FC4B2),
-                          fontSize: 15,
+                          
                         ),
                       )),
                 ],
