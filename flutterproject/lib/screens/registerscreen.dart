@@ -12,6 +12,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  bool hide = true;
   FirebaseAuth _auth = FirebaseAuth.instance;
   
 
@@ -208,7 +209,7 @@ String? id='';
                           return 'password should be atleast 6 characters long';
                         },
                         onSaved: (input) => _password = input!,
-                          obscureText: true,
+                          obscureText: hide,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                              fillColor: Colors.grey[300],

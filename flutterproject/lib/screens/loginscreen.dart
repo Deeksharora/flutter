@@ -41,9 +41,11 @@ login() async {
     if (_formkey.currentState!.validate()) {
       _formkey.currentState!.save();
 
-      try {
-        Navigator.push(context, MaterialPageRoute(
-      builder: (context) => NavigationScreen()));
+       try {
+        UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+            print(result);
+        //await _auth.currentUser!.updateDisplayName(_name);
+        //await Database(uid: _user!.uid).updateuserdata(_name, _id, true ,0,-1,-1,-1,-1,-1);
       } catch (e) {
         showError(e.toString());
         print(e);
